@@ -32,7 +32,8 @@ minetest.register_on_player_receive_fields(function(user, formname, fields)
 if formname == "setfleshy" then
 	local name = user:get_player_name()
 	local fleshy = tonumber(fields.fleshy)
-	if fleshy then
+	if not fleshy or fleshy <-5 then minetest.chat_send_player(name,"Invalid value / out of range") return
+	else
 	selected_objects[name]:set_armor_groups({fleshy=fields.fleshy})	
 	if selected_objects[name] == user then
 	minetest.chat_send_player(name,minetest.colorize('#FF0','Your fleshy now is '..fleshy)) end
